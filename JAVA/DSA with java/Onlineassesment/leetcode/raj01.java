@@ -17,6 +17,8 @@ class raj01 {
 //            }
 //            System.out.println();
 //        }
+        long a=34,b=345;
+        System.out.println(a/b);
     }
 
 

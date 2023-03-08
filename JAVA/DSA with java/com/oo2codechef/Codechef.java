@@ -156,11 +156,11 @@ class Codechef
 	{
 		Scanner sc=new Scanner(System.in);
 
-//		int T=sc.nextInt();
-////        int T=1;
-//		while(T-->0){
-//
-//		}
+		int T=sc.nextInt();
+//        int T=1;
+		while(T-->0){
+
+		}
 
 
 	}

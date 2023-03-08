@@ -161,7 +161,7 @@ public class raj01 {
     public static void main(String[] args) {
 
         Scanner sc=new Scanner(System.in);
-
+        System.out.println(gcd(4,7));
         int T=sc.nextInt();
 //        int T=1;
         while(T-->0){
