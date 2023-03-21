@@ -6,7 +6,6 @@ import java.util.Map;
 import java.util.Stack;
 
 public class raj02 {
-
     // Incresing Stack
 
     public static void main(String[] args) {

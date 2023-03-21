@@ -17,9 +17,34 @@ public class raj07 {
         {
             System.out.println(list);
         }
+        List<List<Integer>> ans3=new ArrayList<>();
+        System.out.println("subarray_subsequence");
+        System.out.println( subarray_subsequence(0,new int[]{1,2,3,4,5},new ArrayList<>(),ans3));
+//        System.out.println(ans3);
+    }
+ static int num=0;
+    static int  subarray_subsequence(int indx,int[] arr,List<Integer> curr,List<List<Integer>> ans){
+
+        // base case
+        if(indx==arr.length){
+            System.out.println((num++)+" "+curr);
+            ans.add(new ArrayList<>(curr));
+            return 0;
+        }
+
+        // take
+        curr.add(arr[indx]);
+       int Take= 1+subarray_subsequence(indx+1,arr,curr,ans);
+       curr.remove(curr.size()-1);
+
+
+        // NotTake
+        int notTake= 0+subarray_subsequence(indx+1,arr,curr,ans);
+
+       return notTake+Take;
     }
 
-     static List<List<Integer>> subset(int[] arr)
+     static List<List<Integer>> subset(int[] arr)  // continous
      {
          List<List<Integer>> outer=new ArrayList<>();
 

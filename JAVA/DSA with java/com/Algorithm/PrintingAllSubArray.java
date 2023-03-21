@@ -12,7 +12,7 @@ public class PrintingAllSubArray {
         {
             for(int j=i;j< arr.length;j++)
             {
-                for(int k=i;k<j;k++)
+                for(int k=i;k<=j;k++)
                 System.out.print(arr[k]);
 
                 System.out.println();
