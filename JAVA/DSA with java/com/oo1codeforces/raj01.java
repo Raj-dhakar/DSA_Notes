@@ -1,12 +1,8 @@
+import java.math.BigInteger;
 import java.util.*;
 import java.util.Scanner;
 public class raj01 {
 
-    // Bitwise
-//    a^0=a
-//    a^a=0
-//    a^b=c
-//    a^c=b
     static class DisjointSet{
 
         DisjointSet(int n){
@@ -81,9 +77,9 @@ public class raj01 {
         else
             return gcd(b, a % b);
     }
-    static int lcm(int a, int b, int gcdValue)
+    static int lcm(int a, int b)
     {
-        return Math.abs(a * b) / gcdValue;
+        return Math.abs(a * b) / gcd(a,b);
     }
     static public  long exponentMod(long A, long B, int C)
     {
@@ -157,17 +153,23 @@ public class raj01 {
         return ans;
     }
 
-
+    static Scanner sc;
     public static void main(String[] args) {
 
-        Scanner sc=new Scanner(System.in);
-        System.out.println(gcd(4,7));
-        int T=sc.nextInt();
-//        int T=1;
+        sc=new Scanner(System.in);
+
+//        int T=sc.nextInt();
+        int T=1;
         while(T-->0){
-
-
+            solve();
         }
     }
+
+    private static void solve() {
+
+
+        int[] arr=new int[]{1,2,3,5};
+        System.out.println(Arrays.binarySearch(arr,4));
+        }
 
 }
