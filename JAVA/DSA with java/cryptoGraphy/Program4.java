@@ -49,7 +49,7 @@ public class Program4 {
         for (Character it : map.keySet())
             all += it;
 
-        System.out.println(all);
+//        System.out.println(all);
 
         Map<Character, Program1.Pair> place = new HashMap<>();
 
@@ -83,13 +83,13 @@ public class Program4 {
             } else str += s.charAt(i);
         }
         if (str.length() % 2 != 0) str += 'Z';
-        System.out.println(str);
+//        System.out.println(str);
         List<String> group = new ArrayList<>();
         for (int i = 1; i < str.length(); i += 2) {
             String sss = "" + str.charAt(i - 1) + str.charAt(i);
             group.add(sss);
         }
-        System.out.println(group);
+//        System.out.println(group);
         String ans = "";
 
         for (int i = 0; i < group.size(); i++) {
@@ -125,6 +125,6 @@ public class Program4 {
             }
             ans+=" ";
         }
-        System.out.println(ans);
+        System.out.println("ENCRYPTED "+ans);
     }
 }

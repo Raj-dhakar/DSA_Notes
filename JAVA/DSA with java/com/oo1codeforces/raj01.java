@@ -1,4 +1,5 @@
 import java.math.BigInteger;
+import java.sql.ClientInfoStatus;
 import java.util.*;
 import java.util.Scanner;
 public class raj01 {
@@ -167,9 +168,10 @@ public class raj01 {
 
     private static void solve() {
 
+        System.out.println(exponentMod(57,53,77));
 
-        int[] arr=new int[]{1,2,3,5};
-        System.out.println(Arrays.binarySearch(arr,4));
-        }
+    }
+
+
 
 }

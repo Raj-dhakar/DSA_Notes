@@ -9,7 +9,7 @@ public class Program6 {
 
         Scanner sc=new Scanner(System.in);
 
-        System.out.println("Printing Vigenere square");
+        System.out.println("Printing Vigenere square :");
         char[][] map=MAP();
 
         System.out.println("Enter plain text");
@@ -44,7 +44,7 @@ public class Program6 {
             for(int j=0;j<26;j++){
                 ch[i][j]=(char)('A'+((j+i)%26));
             }
-            System.out.println(Arrays.toString(ch[i]));
+//            System.out.println(Arrays.toString(ch[i]));
         }
         return ch;
     }

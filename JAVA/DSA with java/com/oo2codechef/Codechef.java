@@ -159,7 +159,7 @@ class Codechef
 		int T=sc.nextInt();
 //        int T=1;
 		while(T-->0){
-
+			List<Integer> list=new ArrayList<>();
 		}
 
 
