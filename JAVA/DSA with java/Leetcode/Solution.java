@@ -5,47 +5,24 @@ import static java.lang.Math.max;
 import static java.lang.Math.min;
 import static java.lang.Math.abs;
 
- class Solution {
+class Solution {
 
 // Main Function Here
 
 
 // Other Template code
 
-     static long mod=(long)1e9+7;
-     static FastWriter out = new FastWriter();
+     static int mod=(int)1e9+7;
 
-     static class FastWriter {
-         private final BufferedWriter bw;
-
-         public FastWriter() {
-             this.bw = new BufferedWriter(new OutputStreamWriter(System.out));
-         }
-
-         public void print(Object object) throws IOException {
-             bw.append( object+" ");
-         }
-
-         public void println(Object object) throws IOException
-         {
-             print(object);
-             bw.append("\n");
-         }
-
-         public void close() throws IOException {
-             bw.close();
-         }
+     static void print(int[] arr) {
+         for(int it:arr) System.out.print(it+" ");
      }
 
-     static void print(int[] arr) throws IOException {
-         for(int it:arr) out.print(it);
-     }
-
-     static void print(int[][] arr) throws IOException {
+     static void print(int[][] arr) {
 
          for(int[] arrs:arr){
-             for(int it:arrs) out.print(it);
-             out.println(" ");
+             for(int it:arrs) System.out.print(it);
+             System.out.println("");
          }
      }
 
@@ -131,7 +108,7 @@ import static java.lang.Math.abs;
          return Math.abs(a * b) / gcdValue;
      }
 
-     static public  long power(long A, long B, long C) {
+     static public  long power(long A, long B, int C) {
          // Base cases
          if (A == 0)
              return 0;
