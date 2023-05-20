@@ -11,6 +11,7 @@ class Codechef
 				parent.add(i); // initially everyone is connected to itself
 			}
 		}
+
 		List<Integer> parent=new ArrayList<>();
 
 		List<Integer> size=new ArrayList<>();
@@ -34,8 +35,7 @@ class Codechef
 			if(size.get(up_u)<size.get(up_v)){
 				parent.set(up_u,up_v);
 				size.set(up_v, size.get(up_u)+ size.get(up_v));
-			}
-			else{
+			} else{
 				parent.set(up_v,up_u);
 				size.set(up_u, size.get(up_u)+ size.get(up_v));
 			}
@@ -43,6 +43,7 @@ class Codechef
 		}
 
 	}
+
 	static public int upper_bound(int[] arr,int target){
 		int low=0,high=arr.length;
 
@@ -54,6 +55,7 @@ class Codechef
 		}
 		return low;
 	}
+
 	static   public int lower_bound(int[] arr,int target){
 		int low=0,high=arr.length;
 
@@ -65,6 +67,7 @@ class Codechef
 		}
 		return low;
 	}
+
 	static int gcd(int a, int b) {
 
 		// if b=0, a is the GCD
@@ -77,12 +80,12 @@ class Codechef
 		else
 			return gcd(b, a % b);
 	}
-	static int lcm(int a, int b, int gcdValue)
-	{
+
+	static int lcm(int a, int b, int gcdValue) {
 		return Math.abs(a * b) / gcdValue;
 	}
-	static public  long exponentMod(long A, long B, int C)
-	{
+
+	static public  long exponentMod(long A, long B, int C) {
 		// Base cases
 		if (A == 0)
 			return 0;
@@ -90,26 +93,24 @@ class Codechef
 			return 1;
 		// If B is even
 		long y;
-		if (B % 2 == 0)
-		{
+		if (B % 2 == 0) {
 			y = exponentMod(A, B / 2, C);
 			y = (y * y) % C;
 		}
 		// If B is odd
-		else
-		{
+		else {
 			y = A % C;
 			y = (y * exponentMod(A, B - 1, C) % C) % C;
 		}
 		return ((y + C) % C);
 	}
+
 	static public int countPrimes(int n) {
 
 		boolean[] isPrime=new boolean[n+1];
 		Arrays.fill(isPrime,true);
 		int ans=0;
-		for(int i=2;i<=n;i++)
-		{
+		for(int i=2;i<=n;i++) {
 			if(isPrime[i]){
 				ans++;
 				for(int j=i+i;j<n;j+=i){
@@ -119,6 +120,7 @@ class Codechef
 		}
 		return ans;
 	}
+
 	static HashSet<Integer>  distinctPrimeFactors(int num) {
 
 		// we goone use a hashSet as producrt will be very high
@@ -129,10 +131,8 @@ class Codechef
 			ans.add(2);
 			num/=2;}
 
-		for(int i=3;i<=Math.sqrt(num);i++)
-		{
-			while(num%i==0)
-			{
+		for(int i=3;i<=Math.sqrt(num);i++) {
+			while(num%i==0) {
 				ans.add(i); num/=i;
 			}
 		}
@@ -152,16 +152,19 @@ class Codechef
 		}
 		return ans;
 	}
-	public static void main (String[] args) throws java.lang.Exception
-	{
+
+	public static void main (String[] args) throws java.lang.Exception {
 		Scanner sc=new Scanner(System.in);
+//
+//		int T=sc.nextInt();
+////        int T=1;
+//		while(T-->0){
+//			List<Integer> list=new ArrayList<>();
+//		}
 
-		int T=sc.nextInt();
-//        int T=1;
-		while(T-->0){
-			List<Integer> list=new ArrayList<>();
-		}
-
+		List<Integer> freq=new ArrayList<>();
+		freq.add(1);freq.remove(1);
+		System.out.println(freq);
 
 	}
 

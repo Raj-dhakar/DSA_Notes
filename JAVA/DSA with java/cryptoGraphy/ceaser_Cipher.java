@@ -4,7 +4,7 @@ public class ceaser_Cipher {
 
     public static void main(String[] args) {
 
-        System.out.println(CeaserCipher("A CAT SLEEP"));
+        System.out.println(CeaserCipher("DEFGH"));
     }
 
   static   public String CeaserCipher(String s){
@@ -17,11 +17,11 @@ public class ceaser_Cipher {
                 continue;}
             if(Character.isUpperCase(ch)){
 
-                char c=(char)((int)(ch-'A'+3)%26+65);
+                char c=(char)((int)(ch-'A'-3)%26+65);
                 sb.append(c);
             }
             else{
-                char c=(char)((int)(ch-'a'+3)%26+97);
+                char c=(char)((int)(ch-'a'-3)%26+97);
                 sb.append(c);
             }
         }
