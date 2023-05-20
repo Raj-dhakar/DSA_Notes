@@ -5,7 +5,7 @@ import static java.lang.Math.max;
 import static java.lang.Math.min;
 import static java.lang.Math.abs;
 
-public class Main{
+public class Codeforces {
 
     static long mod=(long)1e9+7;
   static  FastWriter out = new FastWriter();
