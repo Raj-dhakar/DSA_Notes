@@ -10,6 +10,7 @@ class Solution {
 // Main Function Here
 
 
+
 // Other Template code
 
      static int mod=(int)1e9+7;
