@@ -26,6 +26,8 @@ public class Codeforces {
     }
 
     private static void solve() throws IOException {
+
+
     }
 
     static class FastReader{
