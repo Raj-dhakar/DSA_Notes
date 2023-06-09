@@ -9,10 +9,11 @@ class Solution {
 
 // Main Function Here
 
-
+    
 
 // Other Template code
 
+    static int[] dir={0,1,0,-1,0};
      static int mod=(int)1e9+7;
 
      static void print(int[] arr) {
@@ -189,4 +190,15 @@ class Solution {
          for(int i=0;i<list.size();i++) arr[i]=list.get(i);
      }
 
+    static public static String sortString(String inputString)
+    {
+        // Converting input string to character array
+        char tempArray[] = inputString.toCharArray();
+
+        // Sorting temp array using
+        Arrays.sort(tempArray);
+
+        // Returning new sorted string
+        return new String(tempArray);
+    }
 }

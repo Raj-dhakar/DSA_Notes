@@ -1,4 +1,4 @@
-package Codeforces;
+//package Codeforces;
 import java.util.*;
 import java.io.*;
 import static java.lang.Math.max;
@@ -8,13 +8,12 @@ import static java.lang.Math.abs;
 public class Codeforces {
 
     static long mod=(long)1e9+7;
-  static  FastWriter out = new FastWriter();
-   static FastReader in = new FastReader();
+    static int[] dir={0,1,0,-1,0};
 
     public static void main(String[] args) {
         try {
-//            int testCases=in.nextInt();
-            int testCases = 1;
+//            int testCases = 1;
+             int testCases=in.nextInt();
             while(testCases-- > 0){
                 // write code here
                 solve();
@@ -29,6 +28,20 @@ public class Codeforces {
 
 
     }
+
+
+    static class Pair{
+
+        int first,second;
+
+        public Pair(int first, int second) {
+            this.first = first;
+            this.second = second;
+        }
+    }
+
+    static  FastWriter out = new FastWriter();
+    static FastReader in = new FastReader();
 
     static class FastReader{
         BufferedReader br;
@@ -88,6 +101,7 @@ public class Codeforces {
 
     static void print(int[] arr) throws IOException {
         for(int it:arr) out.print(it);
+        out.println("");
     }
 
     static void print(int[][] arr) throws IOException {
@@ -96,6 +110,7 @@ public class Codeforces {
             for(int it:arrs) out.print(it);
             out.println(" ");
         }
+        out.println("");
     }
 
     static class DisjointSet{
@@ -258,6 +273,39 @@ public class Codeforces {
         Collections.sort(list);
 
         for(int i=0;i<list.size();i++) arr[i]=list.get(i);
+    }
+
+    static void reverse(int[] arr){
+        int low=0,high=arr.length-1;
+        while(low<high){
+            int val=arr[low];
+            arr[low]=arr[high];
+            arr[high]=val;
+            low++;high--;
+        }
+    }
+
+    static String reverse(String s){
+        StringBuilder ans=new StringBuilder(s);
+        return ans.reverse().toString();
+    }
+
+    static long sum(int[] arr){
+        long ans=0;
+        for(int it:arr) ans+=it;
+        return ans;
+    }
+
+    public static String sortString(String inputString)
+    {
+        // Converting input string to character array
+        char tempArray[] = inputString.toCharArray();
+
+        // Sorting temp array using
+        Arrays.sort(tempArray);
+
+        // Returning new sorted string
+        return new String(tempArray);
     }
 }
 

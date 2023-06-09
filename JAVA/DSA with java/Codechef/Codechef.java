@@ -31,6 +31,7 @@ class Codechef
 
     private static void solve() throws IOException {
 
+
     }
 
     static class FastReader{
@@ -262,5 +263,17 @@ class Codechef
         Collections.sort(list);
 
         for(int i=0;i<list.size();i++) arr[i]=list.get(i);
+    }
+
+    public static String sortString(String inputString)
+    {
+        // Converting input string to character array
+        char tempArray[] = inputString.toCharArray();
+
+        // Sorting temp array using
+        Arrays.sort(tempArray);
+
+        // Returning new sorted string
+        return new String(tempArray);
     }
 }
