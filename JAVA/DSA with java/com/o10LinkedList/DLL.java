@@ -139,6 +139,21 @@ public class DLL {
         temp.next.prev=temp;
     }
 
+    public void DeleteOK(Node node){
+       if(node.prev==null) {
+           DeleteFirst();
+           return;
+       }
+
+       if(node.next==null){
+           DeleteLast();
+           return;
+       }
+
+       node.prev.next=node.next;
+       node.next.prev=node.prev;
+    }
+
     public boolean Search(int val){
         Node temp=head;
 

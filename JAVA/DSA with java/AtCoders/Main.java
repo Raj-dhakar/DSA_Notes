@@ -1,26 +1,16 @@
-/* package codechef; // don't place package name! */
-
-import com.sun.source.doctree.SerialTree;
-
 import java.util.*;
 import java.io.*;
-import static java.lang.Math.max;
-import static java.lang.Math.min;
-import static java.lang.Math.abs;
+import static java.lang.Math.*;
 
-/* Name of the class has to be "Main" only if the class is public. */
-class Codechef
-{
+public class Main {
 
     static long mod=(long)1e9+7;
-    static FastWriter out = new FastWriter();
-    static FastReader in = new FastReader();
+    static int[] dir={0,1,0,-1,0};
 
-    public static void main (String[] args) throws java.lang.Exception
-    {
+    public static void main(String[] args) {
         try {
-            int testCases=in.nextInt();
-//            int testCases = 1;
+            int testCases = 1;
+//            int  testCases = in.nextInt();
             while(testCases-- > 0){
                 // write code here
                 solve();
@@ -31,10 +21,62 @@ class Codechef
         }
     }
 
+    static Integer[][][][] dp;
+
     private static void solve() throws IOException {
 
-        
+        int n=in.nextInt();
+        String s=in.next();
+
+        int alice=0,bob=0;
+        if(s.charAt(0)=='A') alice++;
+        else bob++;
+
+        for(int i=1;i<s.length();i++){
+            if(s.charAt(i)=='A') alice++;
+            else bob++;
+            if(bob>alice)out.println("BOB");
+            else out.println("Alice");
+        }
     }
+
+    // NOTES
+    /*
+
+       Map Property 
+       Map<Integer,Integer> map=new HashMap<>();
+       Integer[] arr=map.keySet().toArray(new Integer[0]);
+       Integer[] arr=map.values().toArray(new Integer[0]);
+
+     */
+
+
+
+    static class Pair{
+
+        int first;
+        int second;
+
+        public Pair(int first, int second) {
+            this.first = first;
+            this.second = second;
+        }
+    }
+
+    static class Tuple{
+
+        int first;
+        int second;
+        int third;
+        public Tuple(int first, int second,int third) {
+            this.first = first;
+            this.second = second;
+            this.third=third;
+        }
+    }
+
+    static  FastWriter out = new FastWriter();
+    static FastReader in = new FastReader();
 
     static class FastReader{
         BufferedReader br;
@@ -82,8 +124,7 @@ class Codechef
             bw.append( object+" ");
         }
 
-        public void println(Object object) throws IOException
-        {
+        public void println(Object object) throws IOException {
             print(object);
             bw.append("\n");
         }
@@ -104,7 +145,9 @@ class Codechef
             for(int it:arrs) out.print(it);
             out.println(" ");
         }
+        out.println("");
     }
+
 
     static class DisjointSet{
 
@@ -268,6 +311,27 @@ class Codechef
         for(int i=0;i<list.size();i++) arr[i]=list.get(i);
     }
 
+    static void reverse(int[] arr){
+        int low=0,high=arr.length-1;
+        while(low<high){
+            int val=arr[low];
+            arr[low]=arr[high];
+            arr[high]=val;
+            low++;high--;
+        }
+    }
+
+    static String reverse(String s){
+        StringBuilder ans=new StringBuilder(s);
+        return ans.reverse().toString();
+    }
+
+    static long sum(int[] arr){
+        long ans=0;
+        for(int it:arr) ans+=it;
+        return ans;
+    }
+
     public static String sortString(String inputString)
     {
         // Converting input string to character array
@@ -312,7 +376,7 @@ class Codechef
     public static int[][] NcR(int n){
 
         // First find all pair for NcR
-        int[][] dp=new int[n+1][n+1];
+       int[][] dp=new int[n+1][n+1];
 
         for (int i = 0; i < n; ++i) {
             dp[i][0] = dp[i][i] = 1;
@@ -325,3 +389,4 @@ class Codechef
         return dp;
     }
 }
+

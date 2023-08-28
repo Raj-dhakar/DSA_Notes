@@ -1,9 +1,7 @@
 //package Codeforces;
 import java.util.*;
 import java.io.*;
-import static java.lang.Math.max;
-import static java.lang.Math.min;
-import static java.lang.Math.abs;
+import static java.lang.Math.*;
 
 public class Codeforces {
 
@@ -12,8 +10,8 @@ public class Codeforces {
 
     public static void main(String[] args) {
         try {
-//            int testCases = 1;
-             int testCases=in.nextInt();
+            int testCases = 1;
+//            int  testCases = in.nextInt();
             while(testCases-- > 0){
                 // write code here
                 solve();
@@ -24,19 +22,45 @@ public class Codeforces {
         }
     }
 
+    static Integer[][][][] dp;
+
     private static void solve() throws IOException {
 
 
     }
 
+    // NOTES
+    /*
+
+       Map Property 
+       Map<Integer,Integer> map=new HashMap<>();
+       Integer[] arr=map.keySet().toArray(new Integer[0]);
+       Integer[] arr=map.values().toArray(new Integer[0]);
+
+     */
+
+
 
     static class Pair{
 
-        int first,second;
+        int first;
+        int second;
 
         public Pair(int first, int second) {
             this.first = first;
             this.second = second;
+        }
+    }
+
+    static class Tuple{
+
+        int first;
+        int second;
+        int third;
+        public Tuple(int first, int second,int third) {
+            this.first = first;
+            this.second = second;
+            this.third=third;
         }
     }
 
@@ -112,6 +136,7 @@ public class Codeforces {
         }
         out.println("");
     }
+
 
     static class DisjointSet{
 
@@ -306,6 +331,51 @@ public class Codeforces {
 
         // Returning new sorted string
         return new String(tempArray);
+    }
+
+    public  static int[] inputArray(int n){
+
+        int[] arr=new int[n];
+        for(int i=0;i<arr.length;i++) arr[i]=in.nextInt();
+
+        return arr;
+    }
+
+    public static int[][] inputArray(int m,int n){
+
+        int[][] arr=new int[m][n];
+        for(int i=0;i<arr.length;i++){
+            for(int j=0;j<arr[0].length;j++) arr[i][j]=in.nextInt();
+        }
+
+        return arr;
+    }
+
+    public static int max_Element(int[] arr){
+        int ans=Integer.MIN_VALUE;
+        for(int it:arr) ans=max(ans,it);
+        return ans;
+    }
+    public static int min_Element(int[] arr){
+        int ans=Integer.MAX_VALUE;
+        for(int it:arr) ans=min(ans,it);
+        return ans;
+    }
+
+    public static int[][] NcR(int n){
+
+        // First find all pair for NcR
+       int[][] dp=new int[n+1][n+1];
+
+        for (int i = 0; i < n; ++i) {
+            dp[i][0] = dp[i][i] = 1;
+        }
+        for (int i = 2; i < n; i++) {
+            for (int j = 1; j < i; j++) {
+                dp[i][j] = (int) ((dp[i - 1][j - 1] + dp[i - 1][j]) % mod);
+            }
+        }
+        return dp;
     }
 }
 

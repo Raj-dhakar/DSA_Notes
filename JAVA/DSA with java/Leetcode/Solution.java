@@ -1,3 +1,5 @@
+import com.sun.source.tree.Tree;
+
 import java.io.*;
 import java.util.*;
 
@@ -9,12 +11,23 @@ class Solution {
 
 // Main Function Here
 
-    
+  
 
 // Other Template code
 
+//    Arrays.sort(arr, Comparator.reverseOrder()); Sort in reverse order // The Data type should be of wrapper class not int or float but Integer ...
     static int[] dir={0,1,0,-1,0};
      static int mod=(int)1e9+7;
+
+    static class Pair{
+
+        int first,second;
+
+        public Pair(int first, int second) {
+            this.first = first;
+            this.second = second;
+        }
+    }
 
      static void print(int[] arr) {
          for(int it:arr) System.out.print(it+" ");
@@ -190,7 +203,7 @@ class Solution {
          for(int i=0;i<list.size();i++) arr[i]=list.get(i);
      }
 
-    static public static String sortString(String inputString)
+     public static String sortString(String inputString)
     {
         // Converting input string to character array
         char tempArray[] = inputString.toCharArray();
