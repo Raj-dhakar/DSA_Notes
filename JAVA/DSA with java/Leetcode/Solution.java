@@ -11,9 +11,18 @@ class Solution {
 
 // Main Function Here
 
-  
 
 // Other Template code
+
+    /*
+
+    Collections.sort(nums, new Comparator<List<Integer>>() {
+            @Override
+            public int compare(List<Integer> o1, List<Integer> o2) {
+                return o1.get(0).compareTo(o2.get(0));
+            }
+        });
+    */
 
 //    Arrays.sort(arr, Comparator.reverseOrder()); Sort in reverse order // The Data type should be of wrapper class not int or float but Integer ...
     static int[] dir={0,1,0,-1,0};
@@ -213,5 +222,38 @@ class Solution {
 
         // Returning new sorted string
         return new String(tempArray);
+    }
+
+   static class LCA {
+
+        int[][] dp;
+        int LOG;
+        public LCA(int n, int[] parent) {
+            LOG=(int)(Math.log(n)/Math.log(2))+1;
+
+            dp=new int[LOG+1][n];
+            for(int[] it:dp) Arrays.fill(it,-1);
+
+            for(int i=0;i<LOG;i++){
+                for(int v=0;v<n;v++){
+
+                    if(i==0) dp[i][v]=parent[v];
+                    else{
+                        if(dp[i-1][v]==-1) dp[i][v]=-1;
+                        else dp[i][v]=dp[i-1][dp[i-1][v]];
+                    }
+                }
+            }
+        }
+
+        public int getKthAncestor(int node, int k) {
+
+            for(int i=0;i<LOG;i++){
+                if(node==-1) return -1;
+                if((k&1)==1) node=dp[i][node];
+                k>>=1;
+            }
+            return node;
+        }
     }
 }

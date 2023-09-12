@@ -25,19 +25,7 @@ public class Main {
 
     private static void solve() throws IOException {
 
-        int n=in.nextInt();
-        String s=in.next();
 
-        int alice=0,bob=0;
-        if(s.charAt(0)=='A') alice++;
-        else bob++;
-
-        for(int i=1;i<s.length();i++){
-            if(s.charAt(i)=='A') alice++;
-            else bob++;
-            if(bob>alice)out.println("BOB");
-            else out.println("Alice");
-        }
     }
 
     // NOTES

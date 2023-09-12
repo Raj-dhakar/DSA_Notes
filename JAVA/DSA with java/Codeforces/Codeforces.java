@@ -10,8 +10,8 @@ public class Codeforces {
 
     public static void main(String[] args) {
         try {
-            int testCases = 1;
-//            int  testCases = in.nextInt();
+//            int testCases = 1;
+            int  testCases = in.nextInt();
             while(testCases-- > 0){
                 // write code here
                 solve();
@@ -22,15 +22,15 @@ public class Codeforces {
         }
     }
 
-    static Integer[][][][] dp;
-
+    static Integer[][] dp;
     private static void solve() throws IOException {
-
-
     }
 
     // NOTES
     /*
+
+    1) If you cant think of anything think of Binary Search.
+    2) Dont forget to see the constraints.
 
        Map Property 
        Map<Integer,Integer> map=new HashMap<>();
@@ -276,6 +276,16 @@ public class Codeforces {
         return ans;
     }
 
+    public static int minDivisor(int n) {
+        for (int d = 2; d <= Math.round(Math.sqrt(n)); d++) {
+            if (n % d == 0) {
+                return d;
+            }
+        }
+        return n;
+    }
+
+
     static List<Integer> divisors(int n){
         List<Integer> ans=new ArrayList<>();
         for(int i=2;i*i<=n;i++){
@@ -376,6 +386,16 @@ public class Codeforces {
             }
         }
         return dp;
+    }
+
+    private static boolean isPrime(long n) {
+
+        if(n<=1) return false;
+
+        for(int i=2;i<=Math.sqrt(n);i++){
+            if(n%i==0) return false;
+        }
+        return true;
     }
 }
 
