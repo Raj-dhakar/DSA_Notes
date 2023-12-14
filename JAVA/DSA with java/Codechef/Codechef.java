@@ -1,6 +1,7 @@
 /* package codechef; // don't place package name! */
 
 import com.sun.source.doctree.SerialTree;
+import com.sun.source.tree.ArrayAccessTree;
 import com.sun.source.tree.Tree;
 
 import java.util.*;
@@ -20,8 +21,8 @@ class Codechef
     public static void main (String[] args) throws java.lang.Exception
     {
         try {
-//            int testCases=in.nextInt();
-            int testCases = 1;
+            int testCases=in.nextInt();
+//            int testCases = 1;
             while(testCases-- > 0){
                 // write code here
                 solve();
@@ -34,17 +35,18 @@ class Codechef
 
     private static void solve() throws IOException {
 
-        String s=in.next();
-        out.println(s.charAt(6));
+        int n=in.nextInt();
+        int[] arr=new int[n];
+
     }
 
 
     static class Pair{
 
-        char first;
+        int first;
         int second;
 
-        public Pair(char first, int second) {
+        public Pair(int first, int second) {
             this.first = first;
             this.second = second;
         }
