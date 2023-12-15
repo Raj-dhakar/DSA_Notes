@@ -31,18 +31,8 @@ public class Codeforces {
 
     static Integer[][] dp;
     private static void solve() throws IOException {
-        String s = in.next();
-        s += "$";
-        int t=in.nextInt();
-        while(t-->0) {
-            String pat=in.next();
-            SuffixArray suffixarray = new SuffixArray();
-            int[] index = suffixarray.suffixArray(s);
-//        for(int num:index) out.print(num+" ");
-            int ans = SuffixArray.search(pat, s, index, s.length());
-            if (ans == -1) out.println("NO");
-            else out.println("YES");
-        }
+
+
     }
 
     // NOTES
@@ -419,7 +409,7 @@ public class Codeforces {
 
     static class SuffixArray
     {
-        // always apply $ after string
+        // It store all suffix in lexiograhically order
         // Class to store information of a suffix
         public static class Suffix implements Comparable<Suffix>
         {
@@ -528,7 +518,50 @@ public class Codeforces {
             return suf;
         }
 
+        static int search(String pat, String txt, int[] suffArr)
+        {
 
+            // Get the length of the pattern
+            int n= txt.length();
+            int m = pat.length();
+
+            // Initialize left and right indexes
+            int l = 0;
+            int r = n - 1;
+
+            // Do simple binary search for the pat in txt using the built suffix array
+            while (l <= r) {
+
+                // Find the middle index of the current subarray
+                int mid = l + (r - l) / 2;
+
+                // Get the substring of txt starting from suffArr[mid] and of length m
+                String res = txt.substring(suffArr[mid], min(suffArr[mid] + m,n));
+
+                // If the substring is equal to the pattern
+                if (res.equals(pat)) {
+
+                    // Print the index and return
+//                    System.out.println("Pattern found at index " + );
+                    return suffArr[mid];
+                }
+
+                // If the substring is less than the pattern
+                if (res.compareTo(pat) < 0) {
+
+                    // Move to the right half of the subarray
+                    l = mid + 1;
+                } else {
+
+                    // Move to the left half of the subarray
+                    r = mid - 1;
+                }
+            }
+
+            return -1;
+        }
+
+
+        }
     }
-}
 
