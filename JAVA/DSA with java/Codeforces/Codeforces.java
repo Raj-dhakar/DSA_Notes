@@ -45,7 +45,6 @@ public class Codeforces {
        Map<Integer,Integer> map=new HashMap<>();
        Integer[] arr=map.keySet().toArray(new Integer[0]);
        Integer[] arr=map.values().toArray(new Integer[0]);
-
      */
 
 
@@ -561,6 +560,38 @@ public class Codeforces {
             return -1;
         }
 
+
+        static int[] LCP(String txt, int[] suffixArr) {
+            int n = suffixArr.length;
+            int[] lcp = new int[n];
+            int[] invSuff = new int[n];
+
+            for (int i = 0; i < n; i++) {
+                invSuff[suffixArr[i]] = i;
+            }
+
+            int k = 0;
+
+            for (int i = 0; i < n; i++) {
+                if (invSuff[i] == n - 1) {
+                    k = 0;
+                    continue;
+                }
+
+                int j = suffixArr[invSuff[i] + 1];
+
+                while (i + k < n && j + k < n && txt.charAt(i + k) == txt.charAt(j + k)) {
+                    k++;
+                }
+
+                lcp[invSuff[i]] = k;
+                if (k > 0) {
+                    k--;
+                }
+            }
+
+            return Arrays.copyOfRange(lcp,0,lcp.length);
+        }
 
         }
     }
