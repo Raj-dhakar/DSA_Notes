@@ -16,8 +16,8 @@ public class Codeforces {
 
     public static void main(String[] args) {
         try {
-            int testCases = 1;
-//            int  testCases = in.nextInt();
+//            int testCases = 1;
+            int  testCases = in.nextInt();
             while(testCases-- > 0){
                 // write code here
                 solve();
@@ -31,6 +31,7 @@ public class Codeforces {
 
     static Integer[][] dp;
     private static void solve() throws IOException {
+
 
 
     }
@@ -594,5 +595,94 @@ public class Codeforces {
         }
 
         }
+
+   static class SegmentTree{
+
+
+        int[] seg;
+
+        SegmentTree(int n){
+            seg=new int[4*n];
+        }
+
+        void Build(int indx,int low,int high,int[] arr,boolean or){
+            if(low==high){
+                seg[indx]=arr[low];
+                return ;
+            }
+
+            int mid=low+(high-low)/2;
+
+            Build(2*indx+1,low,mid,arr,!or);
+            Build(2*indx+2,mid+1,high,arr,!or);
+           if(or) seg[indx]=(seg[2*indx+1]|seg[2*indx+2]);
+           else seg[indx]=(seg[2*indx+1]^seg[2*indx+2]);
+        }
+
+        int query(int indx,int low,int high,int L,int R){
+            // no overlapping
+            if(R<low || high<L) return 0;
+
+            // complete overlapping
+            if(low>=L && high<=R) return seg[indx];
+
+            // partial overlapping
+            int mid=low+(high-low)/2;
+            int left=query(2*indx+1,low,mid,L,R);
+            int right=query(2*indx+2,mid+1,high,L,R);
+
+            return left+right;
+        }
+
+        void update(int indx,int low,int high,int Indexupdate,int val,boolean or){
+
+            if(low==high){
+                seg[indx]=val;
+                return ;
+            }
+
+            int mid=low+(high-low)/2;
+            if(Indexupdate<=mid) update(2*indx+1,low,mid,Indexupdate,val,!or);
+            else update(2*indx+2,mid+1,high,Indexupdate,val,!or);
+            if(or) seg[indx]=(seg[2*indx+1]|seg[2*indx+2]);
+            else  seg[indx]=(seg[2*indx+1]^seg[2*indx+2]);
+        }
     }
+
+    public class RollingHash {
+
+        private static final int PRIME = 31;  // Prime number used for hashing
+        private static final int MOD = (int) 1e9 + 9;  // A large prime number to avoid overflow
+
+        private int hash;
+        private int pow;  // Precomputed value of pow(PRIME, windowSize - 1)
+
+        public RollingHash(String str, int windowSize) {
+            if (windowSize > str.length()) {
+                throw new IllegalArgumentException("Window size cannot be greater than the string length");
+            }
+
+            hash = 0;
+            pow = 1;
+
+            // Calculate the initial hash and pow
+            for (int i = 0; i < windowSize; i++) {
+                hash = (int) (((long) hash * PRIME + str.charAt(i)) % MOD);
+                if (i < windowSize - 1) {
+                    pow = (int) ((long) pow * PRIME % MOD);
+                }
+            }
+        }
+
+        public int hash() {
+            return hash;
+        }
+
+        // Update the rolling hash for the next window
+        public void roll(char out, char in) {
+            hash = (int) (((((long) hash - (long) out * pow) % MOD + MOD) * PRIME + in) % MOD);
+        }
+    }
+
+}
 
