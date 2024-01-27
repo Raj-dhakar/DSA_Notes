@@ -1,15 +1,11 @@
+//package Leetcode;
 import com.sun.source.tree.Tree;
 
 import java.io.*;
 import java.util.*;
-
-import static java.lang.Math.max;
-import static java.lang.Math.min;
-import static java.lang.Math.abs;
-
+import static java.lang.Math.*;
 class Solution {
-
-// Main Function Here
+    // Main Function Here
 
 
 // Other Template code
@@ -24,13 +20,20 @@ class Solution {
         });
     */
 
-//    Arrays.sort(arr, Comparator.reverseOrder()); Sort in reverse order // The Data type should be of wrapper class not int or float but Integer ...
-    static int[] dir={0,1,0,-1,0};
-     static int mod=(int)1e9+7;
+    //    Arrays.sort(arr, Comparator.reverseOrder()); Sort in reverse order // The Data type should be of wrapper class not int or float but Integer ...
+    static int[] dir = {0, 1, 0, -1, 0};
 
-    static class Pair{
+    // Knight moves
+    int[][] moves = {
+            {-2, -1}, {-1, -2}, {1, -2}, {2, -1},
+            {-2, 1}, {-1, 2}, {1, 2}, {2, 1}
+    };
+    static int MOD = (int) 1e9 + 7;
 
-        int first,second;
+    static class Pair {
+
+        int first;
+        int second;
 
         public Pair(int first, int second) {
             this.first = first;
@@ -38,182 +41,225 @@ class Solution {
         }
     }
 
-     static void print(int[] arr) {
-         for(int it:arr) System.out.print(it+" ");
-     }
+    public class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
 
-     static void print(int[][] arr) {
+        TreeNode() {
+        }
 
-         for(int[] arrs:arr){
-             for(int it:arrs) System.out.print(it);
-             System.out.println("");
-         }
-     }
+        TreeNode(int val) {
+            this.val = val;
+        }
 
-     static class DisjointSet{
+        TreeNode(int val, TreeNode left, TreeNode right) {
+            this.val = val;
+            this.left = left;
+            this.right = right;
+        }
+    }
 
-         DisjointSet(int n){
-             for(int i=0;i<=n;i++){ // this will cover 0 base indexing and 1 base indexing
-                 size.add(1); // initially eveyone has size 1;
-                 parent.add(i); // initially everyone is connected to itself
-             }
-         }
+    boolean inside(int row,int col,int m,int n){
 
-         List<Integer> parent=new ArrayList<>();
+        if(row<0 || row>=m || col<0 || col>=n) return false;
+        return true;
+    }
 
-         List<Integer> size=new ArrayList<>();
+    public class ListNode {
+        int val;
+        ListNode next;
 
-         int findUPar(int node){
-             if(node== parent.get(node))
-                 return node; // this tells it is the UParent
-             // Here we do Path  Compression so inn future we get it in constant time
-             int UParent=findUPar(parent.get(node));
-             parent.set(node,UParent);
+        ListNode() {
+        }
 
-             return parent.get(node);
-         }
+        ListNode(int val) {
+            this.val = val;
+        }
 
-         void unionBySize(int u,int v){
-             int up_u=findUPar(u);
-             int up_v=findUPar(v);
+        ListNode(int val, ListNode next) {
+            this.val = val;
+            this.next = next;
+        }
+    }
 
-             if(up_u==up_v) return ;// This means both are in same component
+    static void print(int[] arr) {
+        for (int it : arr) System.out.print(it + " ");
+    }
 
-             if(size.get(up_u)<size.get(up_v)){
-                 parent.set(up_u,up_v);
-                 size.set(up_v, size.get(up_u)+ size.get(up_v));
-             } else{
-                 parent.set(up_v,up_u);
-                 size.set(up_u, size.get(up_u)+ size.get(up_v));
-             }
+    static void print(int[][] arr) {
 
-         }
+        for (int[] arrs : arr) {
+            for (int it : arrs) System.out.print(it);
+            System.out.println("");
+        }
+    }
 
-     }
+    static class DisjointSet {
 
-     static public int upper_bound(int[] arr,int target){
-         int low=0,high=arr.length;
+        DisjointSet(int n) {
+            for (int i = 0; i <= n; i++) { // this will cover 0 base indexing and 1 base indexing
+                size.add(1); // initially eveyone has size 1;
+                parent.add(i); // initially everyone is connected to itself
+            }
+        }
 
-         while(low<high){
-             int mid=low+(high-low)/2;
-             if(arr[mid]<=target)
-                 low=mid+1;
-             else high=mid;
-         }
-         return low;
-     }
+        List<Integer> parent = new ArrayList<>();
 
-     static   public int lower_bound(int[] arr,int target){
-         int low=0,high=arr.length;
+        List<Integer> size = new ArrayList<>();
 
-         while(low<high){
-             int mid=low+(high-low)/2;
-             if(arr[mid]<target)
-                 low=mid+1;
-             else high=mid;
-         }
-         return low;
-     }
+        int findUPar(int node) {
+            if (node == parent.get(node))
+                return node; // this tells it is the UParent
+            // Here we do Path  Compression so inn future we get it in constant time
+            int UParent = findUPar(parent.get(node));
+            parent.set(node, UParent);
 
-     static int gcd(int a, int b) {
+            return parent.get(node);
+        }
 
-         // if b=0, a is the GCD
-         if (b == 0)
-             return a;
+        void unionBySize(int u, int v) {
+            int up_u = findUPar(u);
+            int up_v = findUPar(v);
 
-             // call the gcd() method recursively by
-             // replacing a with b and b with
-             // modulus(a,b) as long as b != 0
-         else
-             return gcd(b, a % b);
-     }
+            if (up_u == up_v) return;// This means both are in same component
 
-     static int lcm(int a, int b, int gcdValue) {
-         return Math.abs(a * b) / gcdValue;
-     }
+            if (size.get(up_u) < size.get(up_v)) {
+                parent.set(up_u, up_v);
+                size.set(up_v, size.get(up_u) + size.get(up_v));
+            } else {
+                parent.set(up_v, up_u);
+                size.set(up_u, size.get(up_u) + size.get(up_v));
+            }
 
-     static public  long power(long A, long B, int C) {
-         // Base cases
-         if (A == 0)
-             return 0;
-         if (B == 0)
-             return 1;
-         // If B is even
-         long y;
-         if (B % 2 == 0) {
-             y = power(A, B / 2, C);
-             y = (y * y) % C;
-         }
-         // If B is odd
-         else {
-             y = A % C;
-             y = (y * power(A, B - 1, C) % C) % C;
-         }
-         return ((y + C) % C);
-     }
+        }
 
-     static public int countPrimes(int n) {
+    }
 
-         boolean[] isPrime=new boolean[n+1];
-         Arrays.fill(isPrime,true);
-         int ans=0;
-         for(int i=2;i<=n;i++) {
-             if(isPrime[i]){
-                 ans++;
-                 for(int j=i+i;j<n;j+=i){
-                     isPrime[j]=false;
-                 }
-             }
-         }
-         return ans;
-     }
+    static public int upper_bound(int[] arr, int target) {
+        int low = 0, high = arr.length;
 
-     static HashSet<Integer> distinctPrimeFactors(int num) {
+        while (low < high) {
+            int mid = low + (high - low) / 2;
+            if (arr[mid] <= target)
+                low = mid + 1;
+            else high = mid;
+        }
+        return low;
+    }
 
-         // we goone use a hashSet as producrt will be very high
-         HashSet<Integer> ans=new HashSet<>();
+    static public int lower_bound(List<Integer> arr, int target) {
+        int low = 0, high = arr.size();
+
+        while (low < high) {
+            int mid = low + (high - low) / 2;
+            if (arr.get(mid) < target)
+                low = mid + 1;
+            else high = mid;
+        }
+        return low;
+    }
+
+    static int gcd(int a, int b) {
+
+        // if b=0, a is the GCD
+        if (b == 0)
+            return a;
+
+            // call the gcd() method recursively by
+            // replacing a with b and b with
+            // modulus(a,b) as long as b != 0
+        else
+            return gcd(b, a % b);
+    }
+
+    static int lcm(int a, int b, int gcdValue) {
+        return Math.abs(a * b) / gcdValue;
+    }
+
+    static public long power(long A, long B, int C) {
+        // Base cases
+        if (A == 0)
+            return 0;
+        if (B == 0)
+            return 1;
+        // If B is even
+        long y;
+        if (B % 2 == 0) {
+            y = power(A, B / 2, C);
+            y = (y * y) % C;
+        }
+        // If B is odd
+        else {
+            y = A % C;
+            y = (y * power(A, B - 1, C) % C) % C;
+        }
+        return ((y + C) % C);
+    }
+
+    static public int countPrimes(int n) {
+
+        boolean[] isPrime = new boolean[n + 1];
+        Arrays.fill(isPrime, true);
+        int ans = 0;
+        for (int i = 2; i <= n; i++) {
+            if (isPrime[i]) {
+                ans++;
+                for (int j = i + i; j < n; j += i) {
+                    isPrime[j] = false;
+                }
+            }
+        }
+        return ans;
+    }
+
+    static HashSet<Integer> distinctPrimeFactors(int num) {
+
+        // we goone use a hashSet as producrt will be very high
+        HashSet<Integer> ans = new HashSet<>();
 
 
-         while(num%2==0){
-             ans.add(2);
-             num/=2;}
+        while (num % 2 == 0) {
+            ans.add(2);
+            num /= 2;
+        }
 
-         for(int i=3;i<=Math.sqrt(num);i++) {
-             while(num%i==0) {
-                 ans.add(i); num/=i;
-             }
-         }
-         if(num>2) ans.add(num);
+        for (int i = 3; i <= Math.sqrt(num); i++) {
+            while (num % i == 0) {
+                ans.add(i);
+                num /= i;
+            }
+        }
+        if (num > 2) ans.add(num);
 
-         return ans;
-     }
+        return ans;
+    }
 
-     static List<Integer> divisors(int n){
-         List<Integer> ans=new ArrayList<>();
-         for(int i=2;i*i<=n;i++){
-             if(n%i==0){
-                 ans.add(i);
-                 if(n/i!=i )
-                     ans.add(n/i);
-             }
-         }
-         return ans;
-     }
+    static List<Integer> divisors(int n) {
+        List<Integer> ans = new ArrayList<>();
+        for (int i = 2; i * i <= n; i++) {
+            if (n % i == 0) {
+                ans.add(i);
+                if (n / i != i)
+                    ans.add(n / i);
+            }
+        }
+        return ans;
+    }
 
-     static void sort(int[] arr){
-         // Arrays.sort() == Quick Sort == Worst  Case ==O(N^2)
-         // Collections.sort() == Merge sort == Worst CASE == O(Nlongn)
-         List<Integer> list=new ArrayList<>();
+    static void sort(int[] arr) {
+        // Arrays.sort() == Quick Sort == Worst  Case ==O(N^2)
+        // Collections.sort() == Merge sort == Worst CASE == O(Nlongn)
+        List<Integer> list = new ArrayList<>();
 
-         for(int it:arr) list.add(it);
+        for (int it : arr) list.add(it);
 
-         Collections.sort(list);
+        Collections.sort(list);
 
-         for(int i=0;i<list.size();i++) arr[i]=list.get(i);
-     }
+        for (int i = 0; i < list.size(); i++) arr[i] = list.get(i);
+    }
 
-     public static String sortString(String inputString)
-    {
+    public static String sortString(String inputString) {
         // Converting input string to character array
         char tempArray[] = inputString.toCharArray();
 
@@ -224,23 +270,24 @@ class Solution {
         return new String(tempArray);
     }
 
-   static class LCA {
+    static class LCA {
 
         int[][] dp;
         int LOG;
+
         public LCA(int n, int[] parent) {
-            LOG=(int)(Math.log(n)/Math.log(2))+1;
+            LOG = (int) (Math.log(n) / Math.log(2)) + 1;
 
-            dp=new int[LOG+1][n];
-            for(int[] it:dp) Arrays.fill(it,-1);
+            dp = new int[LOG + 1][n];
+            for (int[] it : dp) Arrays.fill(it, -1);
 
-            for(int i=0;i<LOG;i++){
-                for(int v=0;v<n;v++){
+            for (int i = 0; i < LOG; i++) {
+                for (int v = 0; v < n; v++) {
 
-                    if(i==0) dp[i][v]=parent[v];
-                    else{
-                        if(dp[i-1][v]==-1) dp[i][v]=-1;
-                        else dp[i][v]=dp[i-1][dp[i-1][v]];
+                    if (i == 0) dp[i][v] = parent[v];
+                    else {
+                        if (dp[i - 1][v] == -1) dp[i][v] = -1;
+                        else dp[i][v] = dp[i - 1][dp[i - 1][v]];
                     }
                 }
             }
@@ -248,12 +295,32 @@ class Solution {
 
         public int getKthAncestor(int node, int k) {
 
-            for(int i=0;i<LOG;i++){
-                if(node==-1) return -1;
-                if((k&1)==1) node=dp[i][node];
-                k>>=1;
+            for (int i = 0; i < LOG; i++) {
+                if (node == -1) return -1;
+                if ((k & 1) == 1) node = dp[i][node];
+                k >>= 1;
             }
             return node;
         }
+    }
+
+    static int longestPrefixSuffix(String str) {
+        int[] A = new int[str.length()];
+        int j = 0, i = 1;
+        while (i < str.length()) {
+            if (str.charAt(i) == str.charAt(j)) {
+                A[i] = j + 1;
+                j++;
+                i++;
+            } else {
+                if (j == 0)
+                    i++;
+                else
+                    j = A[j - 1];
+
+            }
+        }
+
+        return A[str.length() - 1];
     }
 }

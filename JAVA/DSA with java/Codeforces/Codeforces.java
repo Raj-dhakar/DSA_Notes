@@ -16,8 +16,8 @@ public class Codeforces {
 
     public static void main(String[] args) {
         try {
-//            int testCases = 1;
-            int  testCases = in.nextInt();
+            int testCases = 1;
+//            int  testCases = in.nextInt();
             while(testCases-- > 0){
                 // write code here
                 solve();
@@ -32,9 +32,19 @@ public class Codeforces {
     static Integer[][] dp;
     private static void solve() throws IOException {
 
-
-
+        int n=in.nextInt();
+        int cnt=1;
+        StringBuilder ans=new StringBuilder();
+        for(int i=0;i<n;i++){
+            if(cnt==1) ans.append('a');
+            else if(cnt==2) ans.append('b');
+            else ans.append('c');
+            cnt++;
+            if(cnt==4) cnt=0;
+        }
+        out.println(ans);
     }
+
 
     // NOTES
     /*
@@ -407,194 +417,6 @@ public class Codeforces {
         return true;
     }
 
-    static class SuffixArray
-    {
-        // It store all suffix in lexiograhically order
-        // Class to store information of a suffix
-        public static class Suffix implements Comparable<Suffix>
-        {
-            int index;
-            int rank;
-            int next;
-
-            public Suffix(int ind, int r, int nr)
-            {
-                index = ind;
-                rank = r;
-                next = nr;
-            }
-
-            // A comparison function used by sort()
-            // to compare two suffixes.
-            // Compares two pairs, returns 1
-            // if first pair is smaller
-            public int compareTo(Suffix s)
-            {
-                if (rank != s.rank) return Integer.compare(rank, s.rank);
-                return Integer.compare(next, s.next);
-            }
-        }
-
-        // This is the main function that takes a string 'txt'
-        // of size n as an argument, builds and return the
-        // suffix array for the given string
-        public  int[] suffixArray(String s)
-        {
-            int n = s.length();
-            Suffix[] su = new Suffix[n];
-
-            // Store suffixes and their indexes in
-            // an array of classes. The class is needed
-            // to sort the suffixes alphabetically and
-            // maintain their old indexes while sorting
-            for (int i = 0; i < n; i++)
-            {
-                su[i] = new Suffix(i, s.charAt(i) - '$', 0);
-            }
-            for (int i = 0; i < n; i++)
-                su[i].next = (i + 1 < n ? su[i + 1].rank : -1);
-
-            // Sort the suffixes using the comparison function
-            // defined above.
-            Arrays.sort(su);
-
-            // At this point, all suffixes are sorted
-            // according to first 2 characters.
-            // Let us sort suffixes according to first 4
-            // characters, then first 8 and so on
-            int[] ind = new int[n];
-
-            // This array is needed to get the index in suffixes[]
-            // from original index. This mapping is needed to get
-            // next suffix.
-            for (int length = 4; length < 2 * n; length <<= 1)
-            {
-
-                // Assigning rank and index values to first suffix
-                int rank = 0, prev = su[0].rank;
-                su[0].rank = rank;
-                ind[su[0].index] = 0;
-                for (int i = 1; i < n; i++)
-                {
-                    // If first rank and next ranks are same as
-                    // that of previous suffix in array,
-                    // assign the same new rank to this suffix
-                    if (su[i].rank == prev &&
-                            su[i].next == su[i - 1].next)
-                    {
-                        prev = su[i].rank;
-                        su[i].rank = rank;
-                    }
-                    else
-                    {
-                        // Otherwise increment rank and assign
-                        prev = su[i].rank;
-                        su[i].rank = ++rank;
-                    }
-                    ind[su[i].index] = i;
-                }
-
-                // Assign next rank to every suffix
-                for (int i = 0; i < n; i++)
-                {
-                    int nextP = su[i].index + length / 2;
-                    su[i].next = nextP < n ?
-                            su[ind[nextP]].rank : -1;
-                }
-
-                // Sort the suffixes according
-                // to first k characters
-                Arrays.sort(su);
-            }
-
-            // Store indexes of all sorted
-            // suffixes in the suffix array
-            int[] suf = new int[n];
-
-            for (int i = 0; i < n; i++)
-                suf[i] = su[i].index;
-
-            // Return the suffix array
-            return suf;
-        }
-
-        static int search(String pat, String txt, int[] suffArr)
-        {
-
-            // Get the length of the pattern
-            int n= txt.length();
-            int m = pat.length();
-
-            // Initialize left and right indexes
-            int l = 0;
-            int r = n - 1;
-
-            // Do simple binary search for the pat in txt using the built suffix array
-            while (l <= r) {
-
-                // Find the middle index of the current subarray
-                int mid = l + (r - l) / 2;
-
-                // Get the substring of txt starting from suffArr[mid] and of length m
-                String res = txt.substring(suffArr[mid], min(suffArr[mid] + m,n));
-
-                // If the substring is equal to the pattern
-                if (res.equals(pat)) {
-
-                    // Print the index and return
-//                    System.out.println("Pattern found at index " + );
-                    return suffArr[mid];
-                }
-
-                // If the substring is less than the pattern
-                if (res.compareTo(pat) < 0) {
-
-                    // Move to the right half of the subarray
-                    l = mid + 1;
-                } else {
-
-                    // Move to the left half of the subarray
-                    r = mid - 1;
-                }
-            }
-
-            return -1;
-        }
-
-
-        static int[] LCP(String txt, int[] suffixArr) {
-            int n = suffixArr.length;
-            int[] lcp = new int[n];
-            int[] invSuff = new int[n];
-
-            for (int i = 0; i < n; i++) {
-                invSuff[suffixArr[i]] = i;
-            }
-
-            int k = 0;
-
-            for (int i = 0; i < n; i++) {
-                if (invSuff[i] == n - 1) {
-                    k = 0;
-                    continue;
-                }
-
-                int j = suffixArr[invSuff[i] + 1];
-
-                while (i + k < n && j + k < n && txt.charAt(i + k) == txt.charAt(j + k)) {
-                    k++;
-                }
-
-                lcp[invSuff[i]] = k;
-                if (k > 0) {
-                    k--;
-                }
-            }
-
-            return Arrays.copyOfRange(lcp,0,lcp.length);
-        }
-
-        }
 
    static class SegmentTree{
 
