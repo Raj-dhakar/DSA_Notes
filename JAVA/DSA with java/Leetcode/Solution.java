@@ -1,11 +1,11 @@
-//package Leetcode;
-import com.sun.source.tree.Tree;
+// JAI SHRI RAM
 
 import java.io.*;
 import java.util.*;
 import static java.lang.Math.*;
 class Solution {
     // Main Function Here
+
 
 
 // Other Template code
@@ -28,6 +28,12 @@ class Solution {
             {-2, -1}, {-1, -2}, {1, -2}, {2, -1},
             {-2, 1}, {-1, 2}, {1, 2}, {2, 1}
     };
+
+    static void swap(Pair a,Pair b){
+        Pair c=a;
+        a=b;
+        b=c;
+    }
     static int MOD = (int) 1e9 + 7;
 
     static class Pair {
@@ -136,12 +142,12 @@ class Solution {
 
     }
 
-    static public int upper_bound(int[] arr, int target) {
-        int low = 0, high = arr.length;
+    static public int upper_bound(List<Integer> arr, int target) {
+        int low = 0, high = arr.size();
 
         while (low < high) {
             int mid = low + (high - low) / 2;
-            if (arr[mid] <= target)
+            if (arr.get(mid) <= target)
                 low = mid + 1;
             else high = mid;
         }

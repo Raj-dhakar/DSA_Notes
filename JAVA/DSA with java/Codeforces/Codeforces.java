@@ -32,17 +32,7 @@ public class Codeforces {
     static Integer[][] dp;
     private static void solve() throws IOException {
 
-        int n=in.nextInt();
-        int cnt=1;
-        StringBuilder ans=new StringBuilder();
-        for(int i=0;i<n;i++){
-            if(cnt==1) ans.append('a');
-            else if(cnt==2) ans.append('b');
-            else ans.append('c');
-            cnt++;
-            if(cnt==4) cnt=0;
-        }
-        out.println(ans);
+
     }
 
 
