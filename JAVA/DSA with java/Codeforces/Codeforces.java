@@ -17,8 +17,8 @@ public class Codeforces {
 
     public static void main(String[] args) {
         try {
-            int testCases = 1;
-//            int  testCases = in.nextInt();
+//            int testCases = 1;
+            int  testCases = in.nextInt();
             while(testCases-- > 0){
                 // write code here
                 solve();
@@ -33,8 +33,12 @@ public class Codeforces {
     static Integer[][] dp;
     private static void solve() throws IOException {
 
+        int n=in.nextInt();
+        int[] arr=inputArray(n);
+
 
     }
+
 
 
     // NOTES
@@ -43,7 +47,7 @@ public class Codeforces {
     1) If you cant think of anything think of Binary Search.
     2) Dont forget to see the constraints.
 
-       Map Property 
+       Map Property
        Map<Integer,Integer> map=new HashMap<>();
        Integer[] arr=map.keySet().toArray(new Integer[0]);
        Integer[] arr=map.values().toArray(new Integer[0]);
@@ -385,7 +389,7 @@ public class Codeforces {
     public static int[][] NcR(int n){
 
         // First find all pair for NcR
-       int[][] dp=new int[n+1][n+1];
+        int[][] dp=new int[n+1][n+1];
 
         for (int i = 0; i < n; ++i) {
             dp[i][0] = dp[i][i] = 1;
@@ -409,7 +413,7 @@ public class Codeforces {
     }
 
 
-   static class SegmentTree{
+    static class SegmentTree{
 
 
         int[] seg;
@@ -428,8 +432,8 @@ public class Codeforces {
 
             Build(2*indx+1,low,mid,arr,!or);
             Build(2*indx+2,mid+1,high,arr,!or);
-           if(or) seg[indx]=(seg[2*indx+1]|seg[2*indx+2]);
-           else seg[indx]=(seg[2*indx+1]^seg[2*indx+2]);
+            if(or) seg[indx]=(seg[2*indx+1]|seg[2*indx+2]);
+            else seg[indx]=(seg[2*indx+1]^seg[2*indx+2]);
         }
 
         int query(int indx,int low,int high,int L,int R){
@@ -461,41 +465,5 @@ public class Codeforces {
             else  seg[indx]=(seg[2*indx+1]^seg[2*indx+2]);
         }
     }
-
-    public class RollingHash {
-
-        private static final int PRIME = 31;  // Prime number used for hashing
-        private static final int MOD = (int) 1e9 + 9;  // A large prime number to avoid overflow
-
-        private int hash;
-        private int pow;  // Precomputed value of pow(PRIME, windowSize - 1)
-
-        public RollingHash(String str, int windowSize) {
-            if (windowSize > str.length()) {
-                throw new IllegalArgumentException("Window size cannot be greater than the string length");
-            }
-
-            hash = 0;
-            pow = 1;
-
-            // Calculate the initial hash and pow
-            for (int i = 0; i < windowSize; i++) {
-                hash = (int) (((long) hash * PRIME + str.charAt(i)) % MOD);
-                if (i < windowSize - 1) {
-                    pow = (int) ((long) pow * PRIME % MOD);
-                }
-            }
-        }
-
-        public int hash() {
-            return hash;
-        }
-
-        // Update the rolling hash for the next window
-        public void roll(char out, char in) {
-            hash = (int) (((((long) hash - (long) out * pow) % MOD + MOD) * PRIME + in) % MOD);
-        }
-    }
-
 }
 

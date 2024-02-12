@@ -1,5 +1,4 @@
-/* package codechef; // don't place package name! */
-
+// JAI SHRI RAM
 import com.sun.source.doctree.SerialTree;
 import com.sun.source.tree.ArrayAccessTree;
 import com.sun.source.tree.Tree;
@@ -35,9 +34,16 @@ class Codechef
 
     private static void solve() throws IOException {
 
-        int n=in.nextInt();
-        int[] arr=new int[n];
-
+        int x=in.nextInt(),y=in.nextInt();
+        while(x>0){
+            if(x>y) swap(x,y);
+            else{
+                System.out.println("ent4r");
+                y=y%x;
+            }
+            System.out.println(x+" "+y);
+        }
+        out.println(y);
     }
 
 
@@ -50,6 +56,12 @@ class Codechef
             this.first = first;
             this.second = second;
         }
+    }
+
+   static void swap(int x,int y){
+        int temp=x;
+        x=y;
+        y=x;
     }
 
     static class FastReader{

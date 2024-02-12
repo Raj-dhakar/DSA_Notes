@@ -6,9 +6,18 @@ import static java.lang.Math.*;
 class Solution {
     // Main Function Here
 
+    public int prefixCount(String[] words, String pref) {
 
+        int ans=0;
 
+        for(String s:words){
+            if(s.length()<pref.length()) continue;
+            if(s.substring(0,pref.length()).equals(pref)) ans++;
+        }
+        return ans;
+    }
 // Other Template code
+
 
     /*
 
@@ -64,6 +73,10 @@ class Solution {
             this.left = left;
             this.right = right;
         }
+    }
+
+    int Manhattandistance(int x1,int y1,int x2,int y2){
+        return abs(x1-x2)+abs(y1-y2);
     }
 
     boolean inside(int row,int col,int m,int n){
@@ -142,12 +155,12 @@ class Solution {
 
     }
 
-    static public int upper_bound(List<Integer> arr, int target) {
-        int low = 0, high = arr.size();
+    static public int upper_bound(Integer[] arr, int target) {
+        int low = 0, high = arr.length;
 
         while (low < high) {
             int mid = low + (high - low) / 2;
-            if (arr.get(mid) <= target)
+            if (arr[mid] <= target)
                 low = mid + 1;
             else high = mid;
         }
@@ -310,23 +323,30 @@ class Solution {
         }
     }
 
-    static int longestPrefixSuffix(String str) {
-        int[] A = new int[str.length()];
-        int j = 0, i = 1;
-        while (i < str.length()) {
-            if (str.charAt(i) == str.charAt(j)) {
-                A[i] = j + 1;
-                j++;
-                i++;
-            } else {
-                if (j == 0)
-                    i++;
-                else
-                    j = A[j - 1];
+     static public int[] kmp(String s) {
+        // To apply kmp use
+         // patten + # + string
+         // If we dont do this it will give us simple LPS
+         // String : a a b a a  c  a a b a a  d
+         // LPS    : 0 1 0 1 2  0  1 2 3 4 5  0
 
+         // String : a a b #  a a b  a a b  a a b
+         // LPS    : 0 1 0 0  1 2 3  1 2 3  1 2 3
+        int n = s.length();
+        int[] lps = new int[n];
+
+        for (int i = 1; i < n; i++) {
+            int prevIdx = lps[i - 1];
+
+            while (prevIdx > 0 && s.charAt(i) != s.charAt(prevIdx)) {
+                prevIdx = lps[prevIdx - 1];
             }
+
+            lps[i] = prevIdx + (s.charAt(i) == s.charAt(prevIdx) ? 1 : 0);
         }
 
-        return A[str.length() - 1];
+        return lps;
     }
+
+
 }
