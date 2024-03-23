@@ -17,8 +17,8 @@ public class Codeforces {
 
     public static void main(String[] args) {
         try {
-//            int testCases = 1;
-            int  testCases = in.nextInt();
+            int testCases = 1;
+//            int  testCases = in.nextInt();
             while(testCases-- > 0){
                 // write code here
                 solve();
@@ -31,10 +31,7 @@ public class Codeforces {
 
 
     static Integer[][] dp;
-    private static void solve() throws IOException {
-
-        int n=in.nextInt();
-        int[] arr=inputArray(n);
+    private static void solve() throws IOException{
 
 
     }
@@ -47,20 +44,26 @@ public class Codeforces {
     1) If you cant think of anything think of Binary Search.
     2) Dont forget to see the constraints.
 
-       Map Property
+    3)   Map Property
        Map<Integer,Integer> map=new HashMap<>();
        Integer[] arr=map.keySet().toArray(new Integer[0]);
        Integer[] arr=map.values().toArray(new Integer[0]);
+
+    4)
+     A B C D E F G H I J  K  L  M  N  O   P  Q  R  S  T  U  V  W  X  Y  Z
+     1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26
+
+
      */
 
 
 
     static class Pair{
 
-        int first;
+        char first;
         int second;
 
-        public Pair(int first, int second) {
+        public Pair(char first, int second) {
             this.first = first;
             this.second = second;
         }
@@ -422,7 +425,7 @@ public class Codeforces {
             seg=new int[4*n];
         }
 
-        void Build(int indx,int low,int high,int[] arr,boolean or){
+        void Build(int indx,int low,int high,int[] arr){
             if(low==high){
                 seg[indx]=arr[low];
                 return ;
@@ -430,10 +433,9 @@ public class Codeforces {
 
             int mid=low+(high-low)/2;
 
-            Build(2*indx+1,low,mid,arr,!or);
-            Build(2*indx+2,mid+1,high,arr,!or);
-            if(or) seg[indx]=(seg[2*indx+1]|seg[2*indx+2]);
-            else seg[indx]=(seg[2*indx+1]^seg[2*indx+2]);
+            Build(2*indx+1,low,mid,arr);
+            Build(2*indx+2,mid+1,high,arr);
+             seg[indx]=(seg[2*indx+1]+seg[2*indx+2]);
         }
 
         int query(int indx,int low,int high,int L,int R){
@@ -451,7 +453,7 @@ public class Codeforces {
             return left+right;
         }
 
-        void update(int indx,int low,int high,int Indexupdate,int val,boolean or){
+        void update(int indx,int low,int high,int Indexupdate,int val){
 
             if(low==high){
                 seg[indx]=val;
@@ -459,11 +461,77 @@ public class Codeforces {
             }
 
             int mid=low+(high-low)/2;
-            if(Indexupdate<=mid) update(2*indx+1,low,mid,Indexupdate,val,!or);
-            else update(2*indx+2,mid+1,high,Indexupdate,val,!or);
-            if(or) seg[indx]=(seg[2*indx+1]|seg[2*indx+2]);
-            else  seg[indx]=(seg[2*indx+1]^seg[2*indx+2]);
+            if(Indexupdate<=mid) update(2*indx+1,low,mid,Indexupdate,val);
+            else update(2*indx+2,mid+1,high,Indexupdate,val);
+             seg[indx]=(seg[2*indx+1]+seg[2*indx+2]);
         }
+    }
+
+    public static int[] prevGreater(int[] arr) {
+        int n = arr.length;
+        int[] result = new int[n];
+        Arrays.fill(result, -1); // Initialize result array with -1
+        Stack<Integer> stack = new Stack<>();
+
+        for (int i = n - 1; i >= 0; i--) {
+            while (!stack.isEmpty() && arr[i] > arr[stack.peek()]) {
+                int smallerIndex = stack.pop();
+                result[smallerIndex] = i;
+            }
+            stack.push(i);
+        }
+
+        return result;
+    }
+
+    public static int[] prevSmaller(int[] arr) {
+        int n = arr.length;
+        int[] result = new int[n];
+        Arrays.fill(result, -1); // Initialize result array with -1
+        Stack<Integer> stack = new Stack<>();
+
+        for (int i = n - 1; i >= 0; i--) {
+            while (!stack.isEmpty() && arr[i] < arr[stack.peek()]) {
+                int greaterIndex = stack.pop();
+                result[greaterIndex] = i;
+            }
+            stack.push(i);
+        }
+
+        return result;
+    }
+    public static int[] nextGreater(int[] arr) {
+        int n = arr.length;
+        int[] result = new int[n];
+        Arrays.fill(result, -1); // Initialize result array with -1
+        Stack<Integer> stack = new Stack<>();
+
+        for (int i = 0; i < n; i++) {
+            while (!stack.isEmpty() && arr[i] > arr[stack.peek()]) {
+                int smallerIndex = stack.pop();
+                result[smallerIndex] = i;
+            }
+            stack.push(i);
+        }
+
+        return result;
+    }
+
+    public static int[] nextSmaller(int[] arr) {
+        int n = arr.length;
+        int[] result = new int[n];
+        Arrays.fill(result, -1); // Initialize result array with -1
+        Stack<Integer> stack = new Stack<>();
+
+        for (int i = 0; i < n; i++) {
+            while (!stack.isEmpty() && arr[i] < arr[stack.peek()]) {
+                int greaterIndex = stack.pop();
+                result[greaterIndex] = i;
+            }
+            stack.push(i);
+        }
+
+        return result;
     }
 }
 

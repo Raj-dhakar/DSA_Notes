@@ -1,25 +1,33 @@
 // JAI SHRI RAM
 
-import java.io.*;
 import java.util.*;
 import static java.lang.Math.*;
 class Solution {
     // Main Function Here
 
-    public int prefixCount(String[] words, String pref) {
 
-        int ans=0;
+    // Other Template code
 
-        for(String s:words){
-            if(s.length()<pref.length()) continue;
-            if(s.substring(0,pref.length()).equals(pref)) ans++;
-        }
-        return ans;
-    }
-// Other Template code
 
 
     /*
+
+    Exactly(n) = atMost(n)-atMost(n-1)
+    Exactly(n): This refers to the number of combinations or permutations where
+     exactly n elements are chosen or arranged. For example, "Exactly(3)" would
+     represent the number of combinations or permutations where exactly three elements
+      are chosen or arranged.
+
+      AtMost(n): This refers to the number of combinations or permutations where at most
+      n elements are chosen or arranged. In other words, it includes all combinations or
+      permutations with 0, 1, 2, ..., n elements. For example, "AtMost(3)" would represent
+      the number of combinations or permutations where at most three elements are chosen or arranged.
+
+
+      Map Property
+       Map<Integer,Integer> map=new HashMap<>();
+       Integer[] arr=map.keySet().toArray(new Integer[0]);
+       Integer[] arr=map.values().toArray(new Integer[0]);
 
     Collections.sort(nums, new Comparator<List<Integer>>() {
             @Override
@@ -28,39 +36,46 @@ class Solution {
             }
         });
     */
-
     //    Arrays.sort(arr, Comparator.reverseOrder()); Sort in reverse order // The Data type should be of wrapper class not int or float but Integer ...
-    static int[] dir = {0, 1, 0, -1, 0};
 
+    static int x[] = { -1, -1, -1,  0, 0,  1, 1, 1 };
+    static int y[] = { -1,  0,  1, -1, 1, -1, 0, 1 };
+    static int[] dir = {0, 1, 0, -1, 0};
     // Knight moves
+
     int[][] moves = {
             {-2, -1}, {-1, -2}, {1, -2}, {2, -1},
             {-2, 1}, {-1, 2}, {1, 2}, {2, 1}
     };
-
     static void swap(Pair a,Pair b){
         Pair c=a;
         a=b;
         b=c;
     }
-    static int MOD = (int) 1e9 + 7;
 
+    static int MOD = (int) 1e9 + 7;
     static class Pair {
 
-        int first;
+        int   first;
+
+        @Override
+        public String toString() {
+            return first+" "+second;
+        }
+
         int second;
 
         public Pair(int first, int second) {
             this.first = first;
             this.second = second;
         }
-    }
 
+    }
     public class TreeNode {
+
         int val;
         TreeNode left;
         TreeNode right;
-
         TreeNode() {
         }
 
@@ -73,10 +88,14 @@ class Solution {
             this.left = left;
             this.right = right;
         }
-    }
 
+    }
     int Manhattandistance(int x1,int y1,int x2,int y2){
         return abs(x1-x2)+abs(y1-y2);
+    }
+
+    long sum(int a){
+        return (long)(a*1l*(a+1L)/2L);
     }
 
     boolean inside(int row,int col,int m,int n){
@@ -155,8 +174,18 @@ class Solution {
 
     }
 
-    static public int upper_bound(Integer[] arr, int target) {
-        int low = 0, high = arr.length;
+    private static boolean isPrime(long n) {
+
+        if(n<=1) return false;
+
+        for(int i=2;i<=Math.sqrt(n);i++){
+            if(n%i==0) return false;
+        }
+        return true;
+    }
+
+    static public int upper_bound(int[] arr, int target,int low) {
+        int high = arr.length;
 
         while (low < high) {
             int mid = low + (high - low) / 2;
@@ -167,12 +196,12 @@ class Solution {
         return low;
     }
 
-    static public int lower_bound(List<Integer> arr, int target) {
-        int low = 0, high = arr.size();
+    static public int lower_bound(int[] arr, int target) {
+        int low = 0, high = arr.length;
 
         while (low < high) {
             int mid = low + (high - low) / 2;
-            if (arr.get(mid) < target)
+            if (arr[mid] < target)
                 low = mid + 1;
             else high = mid;
         }
@@ -323,15 +352,15 @@ class Solution {
         }
     }
 
-     static public int[] kmp(String s) {
+    static public int[] kmp(String s) {
         // To apply kmp use
-         // patten + # + string
-         // If we dont do this it will give us simple LPS
-         // String : a a b a a  c  a a b a a  d
-         // LPS    : 0 1 0 1 2  0  1 2 3 4 5  0
+        // patten + # + string
+        // If we dont do this it will give us simple LPS
+        // String : a a b a a  c  a a b a a  d
+        // LPS    : 0 1 0 1 2  0  1 2 3 4 5  0
 
-         // String : a a b #  a a b  a a b  a a b
-         // LPS    : 0 1 0 0  1 2 3  1 2 3  1 2 3
+        // String : a a b #  a a b  a a b  a a b
+        // LPS    : 0 1 0 0  1 2 3  1 2 3  1 2 3
         int n = s.length();
         int[] lps = new int[n];
 
@@ -348,5 +377,12 @@ class Solution {
         return lps;
     }
 
+    public static boolean isOverlapping(int range1Start, int range1End, int range2Start, int range2End) {
+        // If one range is entirely before the other
+        if (range1End < range2Start || range2End < range1Start) {
+            return false;
+        }
+        return true;
+    }
 
 }
