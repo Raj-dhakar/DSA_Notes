@@ -12,6 +12,10 @@ class Solution {
 
     /*
 
+    You cant sort TreeMap
+    suppose you use treemap ans priority queue just maintain map
+    and remove all the values from heap that not matches map
+
     Exactly(n) = atMost(n)-atMost(n-1)
     Exactly(n): This refers to the number of combinations or permutations where
      exactly n elements are chosen or arranged. For example, "Exactly(3)" would
@@ -54,22 +58,36 @@ class Solution {
     }
 
     static int MOD = (int) 1e9 + 7;
-    static class Pair {
 
-        int   first;
+    static class Pair {
+        long first;
+        long second;
 
         @Override
         public String toString() {
-            return first+" "+second;
+            return "Pair{" +
+                    "first=" + first +
+                    ", second=" + second +
+                    '}';
         }
 
-        int second;
-
-        public Pair(int first, int second) {
+        public Pair(long first, long second) {
             this.first = first;
             this.second = second;
         }
 
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (!(o instanceof Pair)) return false;
+            Pair pair = (Pair) o;
+            return first == pair.first && second == pair.second;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(first, second);
+        }
     }
     public class TreeNode {
 
