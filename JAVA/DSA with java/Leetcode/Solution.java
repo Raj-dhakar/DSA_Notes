@@ -6,6 +6,8 @@ class Solution {
     // Main Function Here
 
 
+
+
     // Other Template code
 
 
@@ -14,7 +16,7 @@ class Solution {
 
     You cant sort TreeMap
     suppose you use treemap ans priority queue just maintain map
-    and remove all the values from heap that not matches map
+    and remove all the values from heap that not matches map whenever you want something from the heap
 
     Exactly(n) = atMost(n)-atMost(n-1)
     Exactly(n): This refers to the number of combinations or permutations where
@@ -57,7 +59,7 @@ class Solution {
         b=c;
     }
 
-    static int MOD = (int) 1e9 + 7;
+    static long MOD = (long) 1e9 + 7;
 
     static class Pair {
         long first;

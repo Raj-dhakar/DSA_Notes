@@ -31,8 +31,8 @@ public class Codeforces {
 
 
     static Integer[][] dp;
-    private static void solve() throws IOException{
 
+    private static void solve() throws IOException{
 
     }
 
@@ -40,6 +40,22 @@ public class Codeforces {
 
     // NOTES
     /*
+
+
+     You cant sort TreeMap
+    suppose you use treemap ans priority queue just maintain map
+    and remove all the values from heap that not matches map whenever you want something from the heap
+
+    Exactly(n) = atMost(n)-atMost(n-1)
+    Exactly(n): This refers to the number of combinations or permutations where
+     exactly n elements are chosen or arranged. For example, "Exactly(3)" would
+     represent the number of combinations or permutations where exactly three elements
+      are chosen or arranged.
+
+      AtMost(n): This refers to the number of combinations or permutations where at most
+      n elements are chosen or arranged. In other words, it includes all combinations or
+      permutations with 0, 1, 2, ..., n elements. For example, "AtMost(3)" would represent
+      the number of combinations or permutations where at most three elements are chosen or arranged.
 
     1) If you cant think of anything think of Binary Search.
     2) Dont forget to see the constraints.
@@ -57,6 +73,12 @@ public class Codeforces {
      */
 
 
+    static void swap(int[]a,int i,int j)
+    {
+        int temp=a[i];
+        a[i]=a[j];
+        a[j]=temp;
+    }
 
     static class Pair{
 
@@ -82,44 +104,52 @@ public class Codeforces {
     }
 
     static  FastWriter out = new FastWriter();
-    static FastReader in = new FastReader();
 
-    static class FastReader{
+    static FastScanner in=new FastScanner();
+
+    static class FastScanner {
         BufferedReader br;
         StringTokenizer st;
-        public FastReader(){
-            br=new BufferedReader(new InputStreamReader(System.in));
+
+        public FastScanner(String s) {
+            try {
+                br = new BufferedReader(new FileReader(s));
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
         }
-        String next(){
-            while(st==null || !st.hasMoreTokens()){
+
+        public FastScanner() {
+            br = new BufferedReader(new InputStreamReader(System.in));
+        }
+
+        String next() {
+            while (st == null || !st.hasMoreElements()) {
                 try {
-                    st=new StringTokenizer(br.readLine());
+                    st = new StringTokenizer(br.readLine());
                 } catch (IOException e) {
+                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
             }
             return st.nextToken();
         }
-        int nextInt(){
+
+        int nextInt() {
             return Integer.parseInt(next());
         }
-        long nextLong(){
+
+        long nextLong() {
             return Long.parseLong(next());
         }
-        double nextDouble(){
+
+        double nextDouble() {
             return Double.parseDouble(next());
         }
-        String nextLine(){
-            String str="";
-            try {
-                str=br.readLine().trim();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return str;
-        }
     }
-    static class FastWriter {
+
+
+    public static class FastWriter {
         private final BufferedWriter bw;
 
         public FastWriter() {
