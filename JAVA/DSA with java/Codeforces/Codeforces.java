@@ -17,8 +17,8 @@ public class Codeforces {
 
     public static void main(String[] args) {
         try {
-            int testCases = 1;
-//            int  testCases = in.nextInt();
+//            int testCases = 1;
+            int  testCases = in.nextInt();
             while(testCases-- > 0){
                 // write code here
                 solve();
@@ -30,12 +30,12 @@ public class Codeforces {
     }
 
 
-    static Integer[][] dp;
+    static Long[][] dp;
 
-    private static void solve() throws IOException{
+    private static void solve() throws IOException {
+
 
     }
-
 
 
     // NOTES

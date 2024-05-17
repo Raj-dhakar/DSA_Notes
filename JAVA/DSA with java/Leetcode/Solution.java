@@ -6,8 +6,6 @@ class Solution {
     // Main Function Here
 
 
-
-
     // Other Template code
 
 
@@ -44,6 +42,21 @@ class Solution {
     */
     //    Arrays.sort(arr, Comparator.reverseOrder()); Sort in reverse order // The Data type should be of wrapper class not int or float but Integer ...
 
+    public static int[] nextGreater(int[] arr) {
+        int n = arr.length;
+        int[] result = new int[n];
+        Arrays.fill(result, -1); // Initialize result array with -1
+        Stack<Integer> stack = new Stack<>();
+
+        for (int i = 0; i < n; i++) {
+            while (!stack.isEmpty() && arr[i] > arr[stack.peek()]) {
+                int smallerIndex = stack.pop();
+                result[smallerIndex] = i;
+            }
+            stack.push(i);
+        }
+        return result;
+    }
     static int x[] = { -1, -1, -1,  0, 0,  1, 1, 1 };
     static int y[] = { -1,  0,  1, -1, 1, -1, 0, 1 };
     static int[] dir = {0, 1, 0, -1, 0};
@@ -241,8 +254,8 @@ class Solution {
             return gcd(b, a % b);
     }
 
-    static int lcm(int a, int b, int gcdValue) {
-        return Math.abs(a * b) / gcdValue;
+    static int lcm(int a, int b) {
+        return Math.abs(a * b) / gcd(a,b);
     }
 
     static public long power(long A, long B, int C) {
