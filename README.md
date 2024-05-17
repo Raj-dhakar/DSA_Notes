@@ -1,4 +1,4 @@
-<img src="/Users/ramprakash/IdeaProjects/DSA_Notes/JAVA/DSA with java/download.png" width="500"/>
+<img src="DSA_Notes/JAVA/DSA with java/download.png" width="500"/>
 
 
 # DSA Notes_
