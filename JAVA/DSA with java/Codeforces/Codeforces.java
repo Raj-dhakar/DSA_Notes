@@ -15,13 +15,19 @@ public class Codeforces {
     static int x[] = { -1, -1, -1,  0, 0,  1, 1, 1 };
     static int y[] = { -1,  0,  1, -1, 1, -1, 0, 1 };
 
+    // Knight moves
+    static int[][] moves = {
+            {-2, -1}, {-1, -2}, {1, -2}, {2, -1},
+            {-2, 1}, {-1, 2}, {1, 2}, {2, 1}
+    };
+
     public static void main(String[] args) {
         try {
 //            int testCases = 1;
             int  testCases = in.nextInt();
             while(testCases-- > 0){
                 // write code here
-                solve();
+                solve(testCases);
             }
             out.close();
         } catch (Exception e) {
@@ -32,10 +38,12 @@ public class Codeforces {
 
     static Long[][] dp;
 
-    private static void solve() throws IOException {
-
-
+    private static void solve(int testcase) throws IOException{
+      
     }
+
+
+
 
 
     // NOTES
@@ -394,6 +402,14 @@ public class Codeforces {
 
         int[] arr=new int[n];
         for(int i=0;i<arr.length;i++) arr[i]=in.nextInt();
+
+        return arr;
+    }
+
+    public  static long[] inputArrayLong(int m){
+
+        long[] arr=new long[m];
+        for(int i=0;i<arr.length;i++) arr[i]=in.nextLong();
 
         return arr;
     }
