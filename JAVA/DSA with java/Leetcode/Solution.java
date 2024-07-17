@@ -5,12 +5,6 @@ import static java.lang.Math.*;
 class Solution {
     // Main Function Here
 
-    public static void main(String[] args) {
-
-
-    }
-
-
 
     // Other Template code
 
@@ -424,6 +418,64 @@ class Solution {
             stack.push(i);
         }
         return result;
+    }
+
+    static public class segmentTree {
+
+        long[] tree;
+        private int n;
+
+        public segmentTree(long[] inputArray) {
+            n = inputArray.length;
+            tree = new long[4 * n];
+            buildTree(inputArray, 0, 0, n - 1);
+        }
+
+        private void buildTree(long[] inputArray, int currentNode, int start, int end) {
+            if (start == end) {
+                tree[currentNode] = inputArray[start];
+            } else {
+                int mid = start + (end - start) / 2;
+                buildTree(inputArray, 2 * currentNode + 1, start, mid);
+                buildTree(inputArray, 2 * currentNode + 2, mid + 1, end);
+                tree[currentNode] = (tree[2 * currentNode + 1] + tree[2 * currentNode + 2]);
+            }
+        }
+
+        public void update(int index, long newValue) {
+            updateValueHelper(0, 0, n - 1, index, newValue);
+        }
+
+        private void updateValueHelper(int currentNode, int start, int end, int index, long newValue) {
+            if (start == end) {
+                tree[currentNode] = newValue;
+            } else {
+                int mid = start + (end - start) / 2;
+                if (index <= mid) {
+                    updateValueHelper(2 * currentNode + 1, start, mid, index, newValue);
+                } else {
+                    updateValueHelper(2 * currentNode + 2, mid + 1, end, index, newValue);
+                }
+                tree[currentNode] = (tree[2 * currentNode + 1] + tree[2 * currentNode + 2]);
+            }
+        }
+
+        public long query(int queryStart, int queryEnd) {
+            return rangeQueryHelper(0, 0, n - 1, queryStart, queryEnd);
+        }
+
+        private long rangeQueryHelper(int currentNode, int start, int end, int queryStart, int queryEnd) {
+            if (queryStart > end || queryEnd < start) {
+                return 0;
+            }
+            if (queryStart <= start && end <= queryEnd) {
+                return tree[currentNode];
+            }
+            int mid = start + (end - start) / 2;
+            long leftQuery = rangeQueryHelper(2 * currentNode + 1, start, mid, queryStart, queryEnd);
+            long rightQuery = rangeQueryHelper(2 * currentNode + 2, mid + 1, end, queryStart, queryEnd);
+            return (leftQuery+ rightQuery);
+        }
     }
 
 }
