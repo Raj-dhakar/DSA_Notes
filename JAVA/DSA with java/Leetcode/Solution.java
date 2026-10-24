@@ -5,7 +5,9 @@ import static java.lang.Math.*;
 class Solution {
     // Main Function Here
 
-
+    static void main(String[] args) {
+        
+    }
     // Other Template code
 
 
